@@ -1,0 +1,1300 @@
+# Resident.mx — Stylesheet Guidelines
+
+> Guía de estilo visual extraída del Brandbook v1.0 | Desarrollado por Softriver
+
+---
+
+## 1. Logo
+
+El logo principal de Resident.mx combina el **brandmark** (ícono de casa estilizada con forma de chat/burbuja) junto con el **wordmark** "Resident.mx".
+
+### Brandmark (Símbolo)
+
+El brandmark es un símbolo que combina una casa estilizada con una burbuja de conversación. Se utiliza como ícono independiente para aplicaciones, favicons y espacios reducidos.
+
+### Wordmark
+
+El wordmark es el diseño tipográfico personalizado del nombre "Resident.mx" sin el símbolo. Utiliza una tipografía bold, sans-serif, en negro.
+
+### Logo Completo
+
+La combinación del brandmark + wordmark forma el logo completo. Esta es la versión preferida para la mayoría de aplicaciones.
+
+---
+
+## 2. Paleta de Colores
+
+### Colores Primarios
+
+| Nombre         | Hex         | Uso                                      |
+|----------------|-------------|------------------------------------------|
+| Negro          | `#000000`   | Color principal del logo y textos         |
+| Cyan / Turquesa | `#23C1DA` | Color de acento principal, headings, CTAs |
+
+### Colores Secundarios
+
+| Nombre         | Hex         | Uso                                      |
+|----------------|-------------|------------------------------------------|
+| Azul           | `#3483FA`   | Elementos secundarios, enlaces            |
+| Púrpura        | `#8958FE`   | Acentos complementarios, gradientes       |
+| Gris Claro     | `#FDF7FA`   | Fondos claros, backgrounds sutiles        |
+
+### CSS Custom Properties
+
+```css
+:root {
+  /* Primarios */
+  --color-black: #000000;
+  --color-cyan: #23C1DA;
+
+  /* Secundarios */
+  --color-blue: #3483FA;
+  --color-purple: #8958FE;
+  --color-light-bg: #FDF7FA;
+
+  /* Monocromáticos */
+  --color-white: #FFFFFF;
+}
+```
+
+---
+
+## 3. Colores Monocromáticos
+
+Para aplicaciones que no soportan color (grabado láser, bordado, impresión 3D, impresión textil), usar exclusivamente las versiones monocromáticas:
+
+- **Negro sobre blanco** — logo negro `#000000` sobre fondo blanco `#FFFFFF`
+- **Blanco sobre negro** — logo blanco `#FFFFFF` sobre fondo negro `#000000`
+
+No se permiten sombras, efectos ni degradados en versiones monocromáticas.
+
+---
+
+## 4. Tipografía
+
+### Familia tipográfica: Helvetica
+
+```css
+:root {
+  --font-family: 'Helvetica', 'Helvetica Neue', Arial, sans-serif;
+}
+```
+
+### Jerarquía tipográfica
+
+| Elemento   | Peso       | Uso                                |
+|------------|------------|------------------------------------|
+| Heading    | **Bold**   | Títulos, encabezados principales   |
+| Paragraph  | Regular    | Cuerpo de texto, descripciones     |
+
+### CSS Typography
+
+```css
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family);
+  font-weight: 700; /* Bold */
+  color: var(--color-black);
+}
+
+p, span, li {
+  font-family: var(--font-family);
+  font-weight: 400; /* Regular */
+  color: var(--color-black);
+}
+
+/* Headings con acento (sobre fondo oscuro) */
+.heading--accent {
+  color: var(--color-cyan);
+  font-weight: 700;
+}
+```
+
+---
+
+## 5. Áreas de Seguridad (Safe Areas)
+
+El logo debe mantener siempre un espacio libre alrededor para garantizar legibilidad.
+
+### Logo completo
+El factor **X** se mide usando el ancho de la letra "d" del wordmark. Este espacio se aplica a los cuatro lados del logo.
+
+### Brandmark (símbolo solo)
+El factor **X** se define como la mitad del ancho del símbolo, aplicado a los cuatro lados.
+
+```css
+/* Referencia de safe area mínima */
+.logo-container {
+  padding: 1em; /* Mínimo equivalente al factor X */
+}
+```
+
+---
+
+## 6. Escalado del Logo
+
+Tamaños mínimos recomendados por tipo de pantalla:
+
+| Contexto          | Ancho mínimo |
+|-------------------|--------------|
+| Móvil / Pequeño   | 150px        |
+| Tablet / Mediano  | 250px        |
+| Desktop / Grande   | 350px        |
+
+```css
+.logo {
+  min-width: 150px;
+  width: 100%;
+  max-width: 350px;
+  height: auto;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+  .logo { min-width: 250px; }
+}
+
+@media (min-width: 1024px) {
+  .logo { min-width: 350px; }
+}
+```
+
+---
+
+## 7. Escalabilidad del Ícono
+
+El brandmark se utiliza como ícono de app en dos formas: cuadrado con bordes redondeados y circular. Ambos usan fondo negro con símbolo blanco. No se debe estirar ni deformar el ícono.
+
+```css
+.app-icon {
+  background-color: var(--color-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-icon--rounded {
+  border-radius: 20%;
+}
+
+.app-icon--circle {
+  border-radius: 50%;
+}
+```
+
+---
+
+## 8. Aplicaciones sobre Fondos
+
+### Fondos permitidos
+
+| Fondo            | Color del logo |
+|------------------|----------------|
+| Blanco `#FFFFFF` | Negro `#000000`|
+| Negro `#000000`  | Blanco `#FFFFFF`|
+
+Usar siempre alto contraste. No colocar el logo sobre fondos de bajo contraste, imágenes complejas o colores que no sean blanco/negro.
+
+```css
+/* Fondo claro */
+.header--light {
+  background-color: #FFFFFF;
+}
+.header--light .logo { color: var(--color-black); }
+
+/* Fondo oscuro */
+.header--dark {
+  background-color: var(--color-black);
+}
+.header--dark .logo { color: var(--color-white); }
+```
+
+---
+
+## 9. Posicionamiento del Logo
+
+Cuatro posiciones recomendadas para el logo en documentos y layouts:
+
+| Posición               | Uso recomendado                     |
+|------------------------|-------------------------------------|
+| Top-left (arriba izq.) | Navegación web, documentos formales |
+| Top-center (arriba cen.)| Landing pages, presentaciones      |
+| Bottom-right (abajo der.)| Pie de documentos, tarjetas       |
+| Center (centro)        | Splash screens, pantallas de carga  |
+
+```css
+.logo--top-left     { position: absolute; top: 1rem; left: 1rem; }
+.logo--top-center   { position: absolute; top: 1rem; left: 50%; transform: translateX(-50%); }
+.logo--bottom-right { position: absolute; bottom: 1rem; right: 1rem; }
+.logo--center       { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+```
+
+---
+
+## 10. Márgenes de Seguridad (Letterhead)
+
+Para documentos con membrete, el margen mínimo de seguridad debe ser de **48px** desde los bordes.
+
+```css
+.letterhead {
+  padding: 48px;
+}
+
+@media print {
+  .letterhead {
+    margin: 48px;
+  }
+}
+```
+
+---
+
+## 11. Uso Incorrecto — Prohibiciones
+
+No hacer lo siguiente con el logo:
+
+- **No cambiar los colores** del logo (ej. no usar rojo/rosa `#E91E63` en el logo)
+- **No distorsionar** ni inclinar el logo (sin skew, sin stretch)
+- **No agregar efectos** como sombras, gradientes, strokes o glows
+- **No rotar** el logo
+- **No alterar** las proporciones del brandmark ni del wordmark
+- **No colocar** sobre fondos de bajo contraste
+
+---
+
+## 12. Brand Pattern
+
+El patrón de marca utiliza el brandmark repetido en grid diagonal. Se puede usar como textura de fondo en materiales de marketing, empaques y aplicaciones digitales.
+
+### Variantes del patrón:
+
+| Variante              | Descripción                           |
+|-----------------------|---------------------------------------|
+| Negro sobre blanco    | Símbolos negros sobre fondo blanco    |
+| Blanco sobre negro    | Símbolos blancos sobre fondo negro    |
+
+```css
+.brand-pattern {
+  background-image: url('pattern-resident-mx.svg');
+  background-repeat: repeat;
+  background-size: 120px 120px;
+}
+
+.brand-pattern--dark {
+  background-color: var(--color-black);
+  /* Usar versión blanca del patrón */
+}
+
+.brand-pattern--light {
+  background-color: var(--color-white);
+  /* Usar versión negra del patrón */
+}
+```
+
+---
+
+## 13. Imagery / Moodboard
+
+Las imágenes de marca deben transmitir profesionalismo, modernidad y tecnología aplicada al sector inmobiliario. Usar fotografías de personas trabajando en entornos modernos, con buena iluminación y composición limpia.
+
+---
+
+## 14. Componentes UI Básicos
+
+> Componentes extraídos de las pantallas reales de la app móvil y el portal web de Resident.mx.
+
+---
+
+### 14.1 Sidebar / Navegación Lateral (Web)
+
+Sidebar fijo a la izquierda con fondo blanco, logo wordmark en la parte superior y menú vertical con íconos. El ítem activo usa `--color-cyan` como color de texto.
+
+```css
+.sidebar {
+  width: 240px;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: var(--color-white);
+  border-right: 1px solid #E5E7EB;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar__logo {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--color-black);
+  margin-bottom: 32px;
+}
+
+.sidebar__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  color: #6B7280;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.sidebar__item:hover {
+  background-color: #F3F4F6;
+  color: var(--color-black);
+}
+
+.sidebar__item--active {
+  color: var(--color-cyan);
+  font-weight: 700;
+  background-color: #F0FDFA;
+}
+
+.sidebar__item-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.sidebar__user {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--color-black);
+}
+```
+
+---
+
+### 14.2 Hero Banner / Header con Imagen
+
+Banner superior con imagen de fondo en escala de grises y logo centrado en blanco. Se usa en dashboard y secciones principales.
+
+```css
+.hero-banner {
+  width: 100%;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: none;
+}
+
+.hero-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.hero-banner__logo {
+  position: relative;
+  z-index: 1;
+  color: var(--color-white);
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 32px;
+}
+
+/* Imagen de fondo en escala de grises */
+.hero-banner--grayscale {
+  filter: grayscale(100%);
+}
+```
+
+---
+
+### 14.3 Profile Header / Tarjeta de Perfil
+
+Avatar circular con info de usuario al lado. Se usa tanto en el dashboard web (con brandmark) como en la app del vigilante.
+
+```css
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 24px;
+  margin-top: -40px; /* Overlap sobre el hero banner */
+  position: relative;
+  z-index: 2;
+}
+
+.profile-header__avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 16px;
+  background-color: var(--color-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid var(--color-white);
+  overflow: hidden;
+}
+
+.profile-header__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-header__name {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--color-black);
+}
+
+.profile-header__role {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  color: #9CA3AF;
+}
+```
+
+---
+
+### 14.4 Stat Cards / Tarjetas de Estadísticas
+
+Tarjetas con borde cyan, número grande centrado y etiqueta debajo. Se muestran en grid de 4 columnas en web.
+
+```css
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  padding: 24px;
+}
+
+@media (max-width: 768px) {
+  .stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.stat-card {
+  border: 1px solid #E0F2F1;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  background-color: var(--color-white);
+  transition: box-shadow 0.2s;
+}
+
+.stat-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.stat-card__value {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 28px;
+  color: var(--color-black);
+  line-height: 1;
+}
+
+.stat-card__label {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 13px;
+  color: #6B7280;
+  margin-top: 8px;
+}
+```
+
+---
+
+### 14.5 Feature Grid / Grid de Acciones Rápidas (Móvil)
+
+Grid 2x2 de tarjetas con ícono, título y subtítulo. Fondo gris claro `#F5F5F5`, bordes redondeados.
+
+```css
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  padding: 16px;
+}
+
+.feature-card {
+  background-color: #F5F5F5;
+  border-radius: 16px;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+}
+
+.feature-card__icon {
+  width: 32px;
+  height: 32px;
+  color: var(--color-black);
+}
+
+.feature-card__title {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--color-black);
+}
+
+.feature-card__subtitle {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 12px;
+  color: #9CA3AF;
+}
+```
+
+---
+
+### 14.6 Icon Grid / Grid de Acciones con Ícono (Web)
+
+Grid 4x2 de acciones con ícono outline centrado y etiqueta. Borde sutil, hover con sombra.
+
+```css
+.icon-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  padding: 24px;
+}
+
+@media (max-width: 768px) {
+  .icon-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.icon-action {
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.icon-action:hover {
+  border-color: var(--color-cyan);
+  box-shadow: 0 2px 8px rgba(35, 193, 218, 0.1);
+}
+
+.icon-action__icon {
+  width: 28px;
+  height: 28px;
+  color: var(--color-black);
+}
+
+.icon-action__label {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 13px;
+  color: var(--color-black);
+  text-align: center;
+}
+```
+
+---
+
+### 14.7 Botones
+
+#### Botón Primario
+Negro sólido con texto blanco. Se usa para acciones principales ("Registrar acceso", "Sign In").
+
+#### Botón Secundario / Outline
+Borde sutil con fondo blanco. Se usa para acciones secundarias y filtros ("Periodo Actual").
+
+#### Botón Outline Activo / Seleccionado
+Borde cyan con texto cyan. Indica el estado seleccionado ("Periodo Anterior").
+
+```css
+/* Base */
+.btn {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 14px;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 24px;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+/* Primario — negro */
+.btn--primary {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+.btn--primary:hover {
+  opacity: 0.9;
+}
+
+/* Secundario — outline */
+.btn--outline {
+  background-color: var(--color-white);
+  color: var(--color-black);
+  border: 1px solid #D1D5DB;
+}
+
+.btn--outline:hover {
+  border-color: #9CA3AF;
+}
+
+/* Outline activo — cyan */
+.btn--outline-active {
+  background-color: var(--color-white);
+  color: var(--color-cyan);
+  border: 1px solid var(--color-cyan);
+}
+
+/* Google / OAuth */
+.btn--oauth {
+  background-color: var(--color-white);
+  color: var(--color-black);
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  font-weight: 400;
+}
+
+/* Tamaños */
+.btn--sm { padding: 8px 16px; font-size: 13px; border-radius: 20px; }
+.btn--lg { padding: 16px 32px; font-size: 16px; }
+.btn--auto { width: auto; }
+```
+
+---
+
+### 14.8 Inputs / Campos de Formulario
+
+Campos con fondo gris claro, bordes redondeados, placeholder en gris. Se usan en login y formularios de registro.
+
+```css
+.input {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--color-black);
+  background-color: #F3F4F6;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  padding: 14px 16px;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input::placeholder {
+  color: #9CA3AF;
+}
+
+.input:focus {
+  border-color: var(--color-cyan);
+  box-shadow: 0 0 0 3px rgba(35, 193, 218, 0.15);
+}
+
+/* Input con ícono */
+.input-group {
+  position: relative;
+}
+
+.input-group__icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  color: #9CA3AF;
+}
+
+.input-group .input {
+  padding-left: 44px;
+}
+
+/* Upload / Image picker */
+.input--upload {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #9CA3AF;
+  cursor: pointer;
+}
+```
+
+---
+
+### 14.9 Detail List / Lista de Detalles Clave-Valor
+
+Se usa en tarjetas de información como "Código de acceso válido". Etiquetas en gris a la izquierda, valores en negro a la derecha.
+
+```css
+.detail-list {
+  background-color: var(--color-white);
+  border: 1px solid #E5E7EB;
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.detail-list__title {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--color-black);
+  margin-bottom: 16px;
+}
+
+.detail-list__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #F3F4F6;
+}
+
+.detail-list__row:last-child {
+  border-bottom: none;
+}
+
+.detail-list__label {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  color: #9CA3AF;
+}
+
+.detail-list__value {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--color-black);
+  text-align: right;
+}
+
+/* Checkmark vigente */
+.detail-list__check {
+  color: var(--color-cyan);
+  width: 20px;
+  height: 20px;
+}
+```
+
+---
+
+### 14.10 Data Table / Tabla de Datos
+
+Tablas para solicitudes, estados de cuenta y reportes financieros. Headers en gris uppercase, filas con hover sutil.
+
+```css
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-family);
+}
+
+.data-table thead th {
+  font-weight: 700;
+  font-size: 11px;
+  color: #6B7280;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: left;
+  padding: 12px 16px;
+  border-bottom: 1px solid #E5E7EB;
+  background-color: #F9FAFB;
+}
+
+.data-table tbody td {
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--color-black);
+  padding: 14px 16px;
+  border-bottom: 1px solid #F3F4F6;
+}
+
+.data-table tbody tr:hover {
+  background-color: #F9FAFB;
+}
+
+/* Fila de total */
+.data-table .row--total td {
+  font-weight: 700;
+  border-top: 2px solid #E5E7EB;
+}
+
+/* Status badge inline */
+.data-table .status--pending {
+  color: #F59E0B;
+}
+
+.data-table .status--active {
+  color: #10B981;
+}
+```
+
+---
+
+### 14.11 Notification Banner / Barra de Notificación
+
+Barra cyan en la parte superior del viewport. Texto blanco centrado con ícono.
+
+```css
+.notification-banner {
+  width: 100%;
+  background-color: var(--color-cyan);
+  color: var(--color-white);
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 13px;
+  text-align: center;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.notification-banner__icon {
+  width: 16px;
+  height: 16px;
+}
+```
+
+---
+
+### 14.12 CTA Card / Tarjeta de Acción Destacada (Móvil)
+
+Tarjeta oscura con ícono y texto. Se usa para acciones importantes como "Generar QR de Acceso".
+
+```css
+.cta-card {
+  background-color: #1F1F1F;
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--color-white);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.cta-card:hover {
+  background-color: #2A2A2A;
+}
+
+.cta-card__icon {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+}
+
+.cta-card__text {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 16px;
+}
+```
+
+---
+
+### 14.13 Info Card / Tarjeta de Información Compacta
+
+Tarjeta con borde superior y contenido de texto. Se usa para pre-autorizaciones y alertas informativas.
+
+```css
+.info-card {
+  background-color: var(--color-white);
+  border-top: 1px solid #E5E7EB;
+  border-bottom: 1px solid #E5E7EB;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.info-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.info-card__title {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--color-black);
+}
+
+.info-card__detail {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 13px;
+  color: #6B7280;
+}
+
+.info-card__arrow {
+  color: #9CA3AF;
+  width: 20px;
+  height: 20px;
+}
+```
+
+---
+
+### 14.14 Login Card / Tarjeta de Login
+
+Tarjeta con fondo oscuro semitransparente (glassmorphism), centrada sobre imagen de fondo en escala de grises. Logo blanco arriba.
+
+```css
+.login-overlay {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.login-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.login-card {
+  position: relative;
+  z-index: 1;
+  background: rgba(40, 40, 40, 0.85);
+  backdrop-filter: blur(16px);
+  border-radius: 20px;
+  padding: 40px 28px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.login-card__logo {
+  width: 200px;
+  margin: 0 auto 8px;
+}
+
+.login-card__title {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--color-white);
+}
+
+.login-card__subtitle {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  color: #9CA3AF;
+}
+
+.login-card .input {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--color-white);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.login-card .input::placeholder {
+  color: #6B7280;
+}
+
+.login-card .btn--primary {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #9CA3AF;
+}
+
+.login-card .btn--primary:enabled {
+  background-color: var(--color-cyan);
+  color: var(--color-white);
+}
+
+/* Checkbox terms */
+.login-card__terms {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  text-align: left;
+  font-size: 13px;
+  color: #9CA3AF;
+}
+
+.login-card__terms a {
+  color: var(--color-white);
+  text-decoration: underline;
+}
+```
+
+---
+
+### 14.15 Bottom Tab Bar / Navegación Inferior (Móvil)
+
+Barra fija inferior con 4 tabs: ícono + etiqueta. Tab activo en negro, inactivos en gris.
+
+```css
+.tab-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--color-white);
+  border-top: 1px solid #E5E7EB;
+  display: flex;
+  justify-content: space-around;
+  padding: 8px 0;
+  padding-bottom: env(safe-area-inset-bottom, 8px);
+  z-index: 100;
+}
+
+.tab-bar__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  padding: 4px 12px;
+}
+
+.tab-bar__icon {
+  width: 24px;
+  height: 24px;
+  color: #9CA3AF;
+}
+
+.tab-bar__label {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 10px;
+  color: #9CA3AF;
+}
+
+.tab-bar__item--active .tab-bar__icon {
+  color: var(--color-black);
+}
+
+.tab-bar__item--active .tab-bar__label {
+  color: var(--color-black);
+  font-weight: 700;
+}
+```
+
+---
+
+### 14.16 Breadcrumbs / Ruta de Navegación
+
+Navegación jerárquica con separador `>`. Texto gris para niveles superiores, negro bold para el nivel actual.
+
+```css
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-family);
+  font-size: 13px;
+  padding: 16px 24px;
+}
+
+.breadcrumbs__item {
+  color: #9CA3AF;
+  font-weight: 400;
+}
+
+.breadcrumbs__item:hover {
+  color: var(--color-black);
+}
+
+.breadcrumbs__separator {
+  color: #D1D5DB;
+}
+
+.breadcrumbs__item--current {
+  color: var(--color-black);
+  font-weight: 700;
+}
+```
+
+---
+
+### 14.17 Charts / Gráficas de Barras
+
+Gráfica de barras para movimientos financieros. Usa `--color-cyan` para ingresos y un cyan claro `#A5F3FC` para egresos.
+
+```css
+:root {
+  --chart-income: #23C1DA;
+  --chart-expense: #A5F3FC;
+}
+
+.chart-legend {
+  display: flex;
+  gap: 16px;
+  font-family: var(--font-family);
+  font-size: 12px;
+  color: #6B7280;
+  margin-bottom: 12px;
+}
+
+.chart-legend__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.chart-legend__dot--income {
+  background-color: var(--chart-income);
+}
+
+.chart-legend__dot--expense {
+  background-color: var(--chart-expense);
+}
+```
+
+---
+
+### 14.18 Dividers / Separadores
+
+Líneas horizontales sutiles entre secciones.
+
+```css
+.divider {
+  border: none;
+  border-top: 1px solid #E5E7EB;
+  margin: 16px 0;
+}
+
+.divider--light {
+  border-color: #F3F4F6;
+}
+
+/* Separador con color cyan (como en la app móvil) */
+.divider--accent {
+  border-color: var(--color-cyan);
+  border-width: 2px;
+}
+```
+
+---
+
+### 14.19 Mobile Page Header
+
+Header de página en la app móvil. Hamburger menu a la izquierda, título centrado.
+
+```css
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 16px;
+  background-color: var(--color-white);
+}
+
+.mobile-header__menu {
+  position: absolute;
+  left: 16px;
+  width: 24px;
+  height: 24px;
+  color: var(--color-black);
+  cursor: pointer;
+}
+
+.mobile-header__title {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--color-black);
+}
+```
+
+---
+
+### 14.20 Greeting Section / Saludo (Móvil)
+
+Sección de bienvenida con emoji, nombre del usuario y mensaje motivacional.
+
+```css
+.greeting {
+  padding: 20px 16px 8px;
+}
+
+.greeting__title {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 24px;
+  color: var(--color-black);
+}
+
+.greeting__message {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  color: #6B7280;
+  margin-top: 4px;
+}
+```
+
+---
+
+## Resumen Rápido de Variables CSS
+
+```css
+:root {
+  /* Colores */
+  --color-black: #000000;
+  --color-cyan: #23C1DA;
+  --color-blue: #3483FA;
+  --color-purple: #8958FE;
+  --color-light-bg: #FDF7FA;
+  --color-white: #FFFFFF;
+
+  /* Tipografía */
+  --font-family: 'Helvetica', 'Helvetica Neue', Arial, sans-serif;
+  --font-weight-bold: 700;
+  --font-weight-regular: 400;
+
+  /* Espaciado */
+  --safe-margin: 48px;
+  --logo-min-width-mobile: 150px;
+  --logo-min-width-tablet: 250px;
+  --logo-min-width-desktop: 350px;
+}
+```
+
+---
+
+*Resident.mx Stylesheet Guidelines v1.0 — Basado en el Brandbook desarrollado por Softriver*
